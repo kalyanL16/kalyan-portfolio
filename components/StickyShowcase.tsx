@@ -71,8 +71,7 @@ export default function StickyShowcase() {
 
   return (
     <section ref={wrapRef} className="relative h-[160vh] bg-black text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(1000px_800px_at_70%_40%,#111_0%,#000_70%)]" />
-      <div className="mx-auto grid h-full w-[min(1200px,92%)] grid-cols-1 items-center gap-10 md:grid-cols-2">
+        <div className="absolute inset-0 bg-[#0b0f17]" />      <div className="mx-auto grid h-full w-[min(1200px,92%)] grid-cols-1 items-center gap-10 md:grid-cols-2">
         <div className="max-w-[46ch] text-zinc-300/90 text-justify">
           <h2 className="mb-4 text-3xl font-semibold text-white">Scroll Storytelling</h2>
           <p>

@@ -1,18 +1,19 @@
 // app/layout.tsx
-import "./globals.css";
-import { Inter } from "next/font/google";
+import type { Metadata } from "next";
+import "@/app/globals.css"; // keep this import
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
-
-export const metadata = {
-  title: "Kalyan | Portfolio",
-  description: "Business Analyst Portfolio",
+export const metadata: Metadata = {
+  title: "Devakalyan Adigopula — Portfolio",
+  description: "Business Analyst portfolio",
+  other: { "theme-color": "#0b0f17" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-black text-white`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className="text-white antialiased overflow-x-hidden">
+        {/* Hard matte background layer, always on bottom */}
+        <div className="fixed inset-0 -z-50 bg-[#0b0f17]" />
         {children}
       </body>
     </html>

@@ -1,3 +1,4 @@
+// app/projects/page.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -41,52 +42,71 @@ export default function ProjectsPage() {
   const listRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
 
-  // Page entrance: matte curtain fade-up reveal
+  // Page entrance: matte curtain fade-up reveal + intro text fade
   useEffect(() => {
+    // Respect reduced motion
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Kill any existing triggers (hot reload safety)
     ScrollTrigger.getAll().forEach((st) => st.kill());
 
-    if (overlayRef.current) {
+    if (!prefersReduced && overlayRef.current) {
       gsap.fromTo(
         overlayRef.current,
         { y: "0%", opacity: 1 },
         {
           y: "-100%",
           opacity: 0,
-          duration: 2.2, // slower, premium timing
+          duration: 1.6,         // slower, premium timing
           ease: "power2.inOut",
-          delay: 0.15,
+          delay: 0.1,
           onComplete: () => {
             overlayRef.current &&
               overlayRef.current.parentElement?.removeChild(overlayRef.current);
           },
         }
       );
+    } else {
+      // If reduced motion, remove overlay immediately
+      overlayRef.current &&
+        overlayRef.current.parentElement?.removeChild(overlayRef.current);
     }
 
     gsap.fromTo(
       ".intro-fade",
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.4 }
+      { opacity: 0, y: 22 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: prefersReduced ? 0.01 : 1.0,
+        ease: "power3.out",
+        stagger: prefersReduced ? 0 : 0.08,
+        delay: prefersReduced ? 0 : 0.25,
+      }
     );
 
-    const cards = Array.from(listRef.current?.querySelectorAll<HTMLElement>(".rotate-card") ?? []);
+    // Card scroll reveals
+    const cards = Array.from(
+      listRef.current?.querySelectorAll<HTMLElement>(".rotate-card") ?? []
+    );
+
     cards.forEach((card, i) => {
       gsap.fromTo(
         card,
-        { opacity: 0, scale: 0.965, y: 36, rotateY: -12 },
+        { opacity: 0, scale: 0.965, y: 34, rotateY: -8 },
         {
           opacity: 1,
           scale: 1,
           y: 0,
           rotateY: 0,
-          duration: 0.9,
-          ease: "power3.out",
+          duration: prefersReduced ? 0.01 : 1.15, // slower reveal
+          ease: "power2.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 78%",
+            start: "top 80%",
             toggleActions: "play none none reverse",
           },
-          delay: i * 0.03,
+          delay: prefersReduced ? 0 : i * 0.03,
         }
       );
     });
@@ -95,9 +115,14 @@ export default function ProjectsPage() {
     return () => ScrollTrigger.getAll().forEach((st) => st.kill());
   }, []);
 
-  // Hover tilt
+  // Subtle parallax tilt on hover (premium feel)
   useEffect(() => {
-    const cards = Array.from(listRef.current?.querySelectorAll<HTMLElement>(".rotate-card") ?? []);
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    const cards = Array.from(
+      listRef.current?.querySelectorAll<HTMLElement>(".rotate-card") ?? []
+    );
     const cleanups: Array<() => void> = [];
 
     cards.forEach((card) => {
@@ -105,13 +130,13 @@ export default function ProjectsPage() {
         const rect = card.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) / (rect.width / 2);
-        const dy = (e.clientY - cy) / (rect.height / 2);
+        const dx = (e.clientX - cx) / (rect.width / 2);  // -1..1
+        const dy = (e.clientY - cy) / (rect.height / 2); // -1..1
 
         gsap.to(card, {
-          rotateY: dx * 6,
-          rotateX: -dy * 6,
-          y: -4,
+          rotateY: dx * 5.5,
+          rotateX: -dy * 5.5,
+          y: -3,
           boxShadow: "0 26px 90px rgba(0,0,0,0.45)",
           transformPerspective: 1000,
           transformOrigin: "center",
@@ -142,20 +167,17 @@ export default function ProjectsPage() {
 
   return (
     <main className="relative min-h-screen text-white overflow-x-hidden">
-      {/* matte black backdrop (exact Hero color, no blue cast) */}
+      {/* Hard-locked matte black backdrop (exact hero color) */}
       <div className="fixed inset-0 -z-20 bg-[#0b0f17]" />
-      {/* soft radial light gradients for premium depth */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-[20%] -left-[15%] h-[180%] w-[150%] rotate-[-16deg] bg-gradient-to-b from-white/[0.06] via-transparent to-transparent blur-[120px] opacity-45" />
-        <div className="absolute -bottom-[25%] -right-[10%] h-[180%] w-[160%] rotate-[14deg] bg-gradient-to-t from-white/[0.04] via-transparent to-transparent blur-[140px] opacity-35" />
-      </div>
 
-      {/* curtain overlay */}
+      {/* Curtain overlay for entrance */}
       <div ref={overlayRef} className="fixed inset-0 z-[100] bg-[#0b0f17]" />
 
       {/* INTRO */}
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-6">
-        <p className="intro-fade text-[11px] tracking-[0.22em] text-white/60">FEATURED WORK</p>
+        <p className="intro-fade text-[16px] md:text-[20px] tracking-[0.28em] font-semibold text-white/70 uppercase">
+          FEATURED WORK
+        </p>
         <h1 className="intro-fade mt-4 text-4xl md:text-6xl font-semibold">
           Showcasing the Art of Business Analysis
         </h1>
@@ -175,13 +197,14 @@ export default function ProjectsPage() {
             return (
               <article
                 key={p.title}
-                className="rotate-card rounded-2xl overflow-hidden bg-white/[0.04] border border-white/10 backdrop-blur-[2px] shadow-[0_20px_60px_rgba(0,0,0,0.40)] will-change-transform"
+                className="rotate-card rounded-2xl overflow-hidden bg-white/[0.045] border border-white/10 backdrop-blur-[2px] shadow-[0_20px_60px_rgba(0,0,0,0.40)] will-change-transform"
               >
                 <div
                   className={`grid items-center gap-8 md:gap-12 md:grid-cols-2 p-5 md:p-8 ${
                     imageLeft ? "" : "md:[&>div:first-child]:order-2"
                   }`}
                 >
+                  {/* IMAGE */}
                   <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl bg-black/40">
                     <Image
                       src={p.image}
@@ -191,10 +214,11 @@ export default function ProjectsPage() {
                       className="object-cover"
                       priority={i === 0}
                     />
-                    {/* optional very subtle neutral overlay; remove if you want pure image */}
-                    <div className="pointer-events-none absolute inset-0 bg-black/20" />
+                    {/* very subtle neutral vignette for depth */}
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_120%_at_80%_30%,rgba(0,0,0,0)_40%,rgba(0,0,0,0.45)_85%)]" />
                   </div>
 
+                  {/* TEXT */}
                   <div className="space-y-4">
                     <span className="inline-flex rounded-full border border-white/15 px-3 py-1 text-[11px] tracking-[0.18em] text-white/70">
                       {p.tag}

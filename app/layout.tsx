@@ -1,19 +1,18 @@
-// app/layout.tsx
+import "@/app/globals.css";
 import type { Metadata } from "next";
-import "@/app/globals.css"; // keep this import
+import HeaderGate from "@/components/HeaderGate"; // ⬅️ gate decides when to show header
 
 export const metadata: Metadata = {
   title: "Devakalyan Adigopula — Portfolio",
-  description: "Business Analyst portfolio",
-  other: { "theme-color": "#0b0f17" },
+  description:
+    "Business Analyst Portfolio featuring data visualization, process optimization, and analytics projects.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="text-white antialiased overflow-x-hidden">
-        {/* Hard matte background layer, always on bottom */}
-        <div className="fixed inset-0 -z-50 bg-[#0b0f17]" />
+    <html lang="en">
+      <body className="bg-[#0a0a0a] text-white">
+        <HeaderGate />
         {children}
       </body>
     </html>

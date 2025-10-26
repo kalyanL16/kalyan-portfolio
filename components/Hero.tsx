@@ -125,7 +125,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[92vh] w-full overflow-hidden bg-black text-white">
+    <section
+      id="hero"  // ⬅️ added anchor for Home to target
+      ref={sectionRef}
+      className="relative min-h-[92vh] w-full overflow-hidden bg-black text-white"
+    >
       <div className="absolute inset-0 -z-20 bg-black" />
       <div className="absolute -z-10 -top-[22%] -left-[12%] h-[170%] w-[160%] rotate-[-18deg] bg-gradient-to-b from-white/[0.07] via-transparent to-transparent blur-[120px] opacity-45 pointer-events-none" />
 
@@ -133,7 +137,6 @@ export default function Hero() {
         {/* LEFT — Text */}
         <div ref={textRef} className="relative">
           <p className="fade-in-up text-[clamp(20px,2.4vw,30px)] font-semibold tracking-wide text-white/90">
-            {/* no shimmer here */}
             Hello, I’m
           </p>
 
@@ -150,7 +153,7 @@ export default function Hero() {
             technical delivery to drive measurable performance and growth.
           </p>
 
-          {/* Buttons with glossy sweep restored */}
+          {/* Buttons with glossy sweep */}
           <div className="fade-in-up mt-10 flex flex-wrap items-center gap-4">
             <Link
               href="/projects"
@@ -186,7 +189,7 @@ export default function Hero() {
             </Link>
           </div>
 
-          {/* Core Skills (unchanged) */}
+          {/* Core Skills */}
           <div className="fade-in-up mt-8">
             <div className="mb-2 text-[11px] tracking-[0.22em] text-white/60">CORE SKILLS</div>
             <ul className="flex flex-wrap gap-2">
@@ -204,7 +207,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — Portrait + Social Rail (unchanged) */}
+        {/* RIGHT — Portrait + Social Rail */}
         <div className="relative flex items-center justify-center">
           <div className="absolute z-0 h-[85%] w-[85%] rounded-full bg-white/[0.06] blur-[70px] opacity-60" />
           <div ref={imgRef} className="relative z-10">

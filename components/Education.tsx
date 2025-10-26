@@ -105,7 +105,7 @@ export default function Education() {
             <p className="edu-fade mt-5 max-w-[58ch] text-[15.5px] leading-[1.8] text-white/80">
               I bridge formal analytics education with real-world delivery. My Master’s in Business
               Analytics sharpens statistical thinking and data strategy, while hands-on experience
-              across enterprise environments like <b>Wipro</b> and <b>Reliance Jio</b> shaped my
+              across enterprise environments like <b>Wipro</b> and <b>Reliance Communications</b> shaped my
               approach to requirements, process modeling, and measurable outcomes. I connect
               stakeholder needs to technical execution making analysis a business advantage.
             </p>

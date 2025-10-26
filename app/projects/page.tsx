@@ -1,9 +1,7 @@
-// app/projects/page.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -42,12 +40,8 @@ export default function ProjectsPage() {
   const listRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
 
-  // Page entrance: matte curtain fade-up reveal + intro text fade
   useEffect(() => {
-    // Respect reduced motion
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Kill any existing triggers (hot reload safety)
     ScrollTrigger.getAll().forEach((st) => st.kill());
 
     if (!prefersReduced && overlayRef.current) {
@@ -57,7 +51,7 @@ export default function ProjectsPage() {
         {
           y: "-100%",
           opacity: 0,
-          duration: 1.6,         // slower, premium timing
+          duration: 1.6,
           ease: "power2.inOut",
           delay: 0.1,
           onComplete: () => {
@@ -67,7 +61,6 @@ export default function ProjectsPage() {
         }
       );
     } else {
-      // If reduced motion, remove overlay immediately
       overlayRef.current &&
         overlayRef.current.parentElement?.removeChild(overlayRef.current);
     }
@@ -85,7 +78,6 @@ export default function ProjectsPage() {
       }
     );
 
-    // Card scroll reveals
     const cards = Array.from(
       listRef.current?.querySelectorAll<HTMLElement>(".rotate-card") ?? []
     );
@@ -99,7 +91,7 @@ export default function ProjectsPage() {
           scale: 1,
           y: 0,
           rotateY: 0,
-          duration: prefersReduced ? 0.01 : 1.15, // slower reveal
+          duration: prefersReduced ? 0.01 : 1.15,
           ease: "power2.out",
           scrollTrigger: {
             trigger: card,
@@ -115,7 +107,6 @@ export default function ProjectsPage() {
     return () => ScrollTrigger.getAll().forEach((st) => st.kill());
   }, []);
 
-  // Subtle parallax tilt on hover (premium feel)
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
@@ -130,8 +121,8 @@ export default function ProjectsPage() {
         const rect = card.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) / (rect.width / 2);  // -1..1
-        const dy = (e.clientY - cy) / (rect.height / 2); // -1..1
+        const dx = (e.clientX - cx) / (rect.width / 2);
+        const dy = (e.clientY - cy) / (rect.height / 2);
 
         gsap.to(card, {
           rotateY: dx * 5.5,
@@ -167,10 +158,10 @@ export default function ProjectsPage() {
 
   return (
     <main className="relative min-h-screen text-white overflow-x-hidden">
-      {/* Hard-locked matte black backdrop (exact hero color) */}
+      {/* Background */}
       <div className="fixed inset-0 -z-20 bg-[#0b0f17]" />
 
-      {/* Curtain overlay for entrance */}
+      {/* Overlay */}
       <div ref={overlayRef} className="fixed inset-0 z-[100] bg-[#0b0f17]" />
 
       {/* INTRO */}
@@ -214,7 +205,6 @@ export default function ProjectsPage() {
                       className="object-cover"
                       priority={i === 0}
                     />
-                    {/* very subtle neutral vignette for depth */}
                     <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_120%_at_80%_30%,rgba(0,0,0,0)_40%,rgba(0,0,0,0.45)_85%)]" />
                   </div>
 
@@ -245,13 +235,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* END / HOME BUTTON */}
-      <section className="flex flex-col items-center justify-center py-28 border-t border-white/10 text-center">
-        <p className="text-white/60 text-sm mb-4">End of Projects</p>
-        <Link href="/" className="btn-premium">
-          <span className="label">Back to Home</span>
-        </Link>
-      </section>
+      {/* Removed Back-to-Home button completely */}
     </main>
   );
 }

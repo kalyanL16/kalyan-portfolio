@@ -4,10 +4,11 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-function useReveal(ref: React.RefObject<HTMLElement>, selector = ".edu-fade") {
+function useReveal(ref: React.RefObject<HTMLElement | null>, selector = ".edu-fade") {
   useEffect(() => {
     const root = ref.current;
     if (!root) return;
+
     const items = Array.from(root.querySelectorAll<HTMLElement>(selector));
     if (!items.length) return;
 
@@ -15,7 +16,7 @@ function useReveal(ref: React.RefObject<HTMLElement>, selector = ".edu-fade") {
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("!opacity-100", "!translate-y-0");
+            (e.target as HTMLElement).classList.add("!opacity-100", "!translate-y-0");
             io.unobserve(e.target);
           }
         });
@@ -24,8 +25,7 @@ function useReveal(ref: React.RefObject<HTMLElement>, selector = ".edu-fade") {
     );
 
     items.forEach((el, i) => {
-      el.style.transition =
-        "transform .8s cubic-bezier(.2,.8,.2,1), opacity .7s ease";
+      el.style.transition = "transform .8s cubic-bezier(.2,.8,.2,1), opacity .7s ease";
       el.style.transitionDelay = `${i * 80}ms`;
       el.classList.add("opacity-0", "translate-y-6");
       io.observe(el);
@@ -45,7 +45,7 @@ export default function Education() {
     <section id="education" ref={sectionRef} className="relative bg-[#0b0f17] text-white">
       <div className="py-20 md:py-28">
         <div className="mx-auto w-[min(1200px,92%)] grid gap-12 md:grid-cols-2 md:gap-14 items-center">
-          {/* LEFT — Portrait without frame, with spotlight + feather mask */}
+          {/* LEFT — Portrait with spotlight + feather mask */}
           <div className="relative mx-auto md:mx-0">
             {/* neutral spotlight */}
             <div className="absolute -inset-24 -z-10 pointer-events-none">
@@ -68,12 +68,13 @@ export default function Education() {
                 className={[
                   "object-cover object-top",
                   "[filter:brightness(1.06)_contrast(1.05)_saturate(1.04)]",
+                  // feathered mask (removes hard square edge)
                   "[--feather:radial-gradient(150%_140%_at_58%_52%,#000_68%,rgba(0,0,0,0)_92%)]",
                   "[-webkit-mask-image:var(--feather)]",
                   "[mask-image:var(--feather)]",
                 ].join(" ")}
               />
-              {/* extra subtle vignette */}
+              {/* subtle vignette */}
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_85%_at_50%_45%,rgba(0,0,0,0)_60%,rgba(0,0,0,0.22)_100%)]" />
             </div>
           </div>

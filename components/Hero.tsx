@@ -1,4 +1,3 @@
-// components/Hero.tsx
 "use client";
 
 import Image from "next/image";
@@ -132,29 +131,62 @@ export default function Hero() {
 
       <div className="mx-auto grid w-[min(1200px,92%)] grid-cols-1 items-center gap-10 pt-6 md:grid-cols-2 md:pt-4">
         {/* LEFT — Text */}
-        <div ref={textRef}>
-          <p className="fade-in-up text-[clamp(20px,2.4vw,30px)] font-semibold tracking-wide text-white/90">Hello, I’m</p>
+        <div ref={textRef} className="relative">
+          <p className="fade-in-up text-[clamp(20px,2.4vw,30px)] font-semibold tracking-wide text-white/90">
+            {/* no shimmer here */}
+            Hello, I’m
+          </p>
+
           <h1 className="fade-in-up mt-2 text-[clamp(44px,6.8vw,90px)] leading-[0.95] font-extrabold text-white">
-            DEVAKALYAN
-            <span className="block text-zinc-400 text-[clamp(36px,6vw,70px)]">ADIGOPULA</span>
+            <span className="shimmer-once">DEVAKALYAN</span>
+            <span className="block shimmer-once text-zinc-400 text-[clamp(36px,6vw,70px)]">
+              ADIGOPULA
+            </span>
           </h1>
 
           <p className="fade-in-up mt-4 max-w-[46ch] text-[15.5px] leading-[1.75] text-zinc-300/90 text-justify">
-            With <b>3+ years</b> of experience as a Business Analyst, I specialize in requirements gathering, data visualization, and process optimization bridging business goals with technical delivery to drive measurable performance and growth.
+            With <b>3+ years</b> of experience as a Business Analyst, I specialize in requirements
+            gathering, data visualization, and process optimization bridging business goals with
+            technical delivery to drive measurable performance and growth.
           </p>
 
-          {/* Buttons */}
+          {/* Buttons with glossy sweep restored */}
           <div className="fade-in-up mt-10 flex flex-wrap items-center gap-4">
-            <Link href="/projects" className="magnetic group relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white/90 border border-white/20 rounded-full overflow-hidden backdrop-blur-md bg-white/[0.06] hover:bg-white/[0.12] transition-transform duration-300 hover:-translate-y-0.5">
-              See my work
+            <Link
+              href="/projects"
+              className="magnetic group relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium
+                         text-white/90 border border-white/20 rounded-full overflow-hidden
+                         backdrop-blur-md bg-white/[0.06] hover:bg-white/[0.12]
+                         transition-transform duration-300 hover:-translate-y-0.5"
+            >
+              <span className="tracking-wide">See my work</span>
+              <span
+                className="pointer-events-none absolute inset-0 bg-gradient-to-r
+                           from-transparent via-white/40 to-transparent opacity-0
+                           group-hover:opacity-100 translate-x-[-100%]
+                           group-hover:translate-x-[100%] transition-all duration-700 ease-out"
+              />
             </Link>
 
-            <Link href="/Deva_Business_Analyst_Resume.pdf" target="_blank" className="magnetic group relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white/90 border border-white/20 rounded-full overflow-hidden backdrop-blur-md bg-white/[0.06] hover:bg-white/[0.12] transition-transform duration-300 hover:-translate-y-0.5">
-              Resume
+            <Link
+              href="/Deva_Business_Analyst_Resume.pdf"
+              target="_blank"
+              className="magnetic group relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium
+                         text-white/90 border border-white/20 rounded-full overflow-hidden
+                         backdrop-blur-md bg-white/[0.06] hover:bg-white/[0.12]
+                         transition-transform duration-300 hover:-translate-y-0.5"
+            >
+              <span className="tracking-wide">Resume</span>
+              <span
+                className="pointer-events-none absolute inset-0 bg-gradient-to-r
+                           from-transparent via-white/40 to-transparent opacity-0
+                           group-hover:opacity-100 translate-x-[-100%]
+                           group-hover:translate-x-[100%] transition-all duration-700 ease-out"
+              />
             </Link>
           </div>
 
-          {/* Core Skills */}
+          {/* Core Skills (unchanged) */}
           <div className="fade-in-up mt-8">
             <div className="mb-2 text-[11px] tracking-[0.22em] text-white/60">CORE SKILLS</div>
             <ul className="flex flex-wrap gap-2">
@@ -172,22 +204,22 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — Portrait + Social Rail */}
+        {/* RIGHT — Portrait + Social Rail (unchanged) */}
         <div className="relative flex items-center justify-center">
-          {/* === Added stronger warm glow layers (behind the image) === */}
-          <div
-            className="pointer-events-none absolute -z-10 h-[520px] w-[520px] rounded-full -translate-y-4
-                       bg-[radial-gradient(closest-side,rgba(255,200,120,0.38),rgba(255,160,60,0.14),rgba(0,0,0,0)_70%)]
-                       blur-[110px] opacity-85 animate-pulse"
-          />
-          <div
-            className="pointer-events-none absolute -z-10 h-[620px] w-[620px] rounded-full -translate-y-8
-                       bg-[radial-gradient(closest-side,rgba(255,255,255,0.06),rgba(0,0,0,0)_70%)]
-                       blur-[120px] opacity-70"
-          />
-
-          {/* existing neutral light */}
           <div className="absolute z-0 h-[85%] w-[85%] rounded-full bg-white/[0.06] blur-[70px] opacity-60" />
+          <div ref={imgRef} className="relative z-10">
+            <Image
+              src="/hero-kalyan.png"
+              alt="Devakalyan Adigopula"
+              width={1200}
+              height={1500}
+              priority
+              unoptimized
+              className="w-full max-w-[560px] h-auto object-contain object-right
+                         [filter:brightness(1.22)_contrast(1.12)_saturate(1.12)]
+                         mix-blend-screen"
+            />
+          </div>
 
           {/* Social Rail */}
           <div className="hidden md:flex flex-col gap-3 absolute right-2 top-1/2 -translate-y-1/2 z-20">
@@ -227,22 +259,10 @@ export default function Hero() {
               </a>
             ))}
           </div>
-
-          <div ref={imgRef} className="relative z-10">
-            <Image
-              src="/hero-kalyan.png"
-              alt="Devakalyan Adigopula"
-              width={1200}
-              height={1500}
-              priority
-              unoptimized
-              className="w-full max-w-[560px] h-auto object-contain object-right [filter:brightness(1.22)_contrast(1.12)_saturate(1.12)] mix-blend-screen"
-            />
-          </div>
         </div>
       </div>
 
-      {/* ===== Arc “page break” ===== */}
+      {/* Arc */}
       <div ref={arcWrapRef} className="mt-12 pb-10">
         <div className="flex flex-col items-center">
           <svg className="block w-[92%] max-w-[1200px] h-[120px]" viewBox="0 0 1200 120" preserveAspectRatio="none">

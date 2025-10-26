@@ -74,18 +74,27 @@ export default function Hero() {
             technical delivery to drive measurable performance and growth.
           </p>
 
-          {/* Minimal Premium CTA */}
-          <div className="mt-10">
+          {/* Minimal Premium CTAs (added Resume beside See my work) */}
+          <div className="mt-10 flex flex-wrap gap-3">
             <Link href="/projects" className="btn-premium">
-              See my work
+              <span className="label">See my work</span>
             </Link>
+            <a
+              href="/Deva_Business_Analyst_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-premium"
+            >
+              <span className="label">View Resume</span>
+            </a>
           </div>
         </div>
 
         {/* RIGHT — Portrait */}
         <div className="relative flex items-center justify-center">
-            {/* neutral, no gradient glow (keeps depth without tint) */}
-            <div className="absolute z-0 h-[85%] w-[85%] rounded-full bg-white/[0.06] blur-[70px] opacity-60" />          <div ref={imgRef} className="relative z-10">
+          {/* neutral, no gradient glow (keeps depth without tint) */}
+          <div className="absolute z-0 h-[85%] w-[85%] rounded-full bg-white/[0.06] blur-[70px] opacity-60" />
+          <div ref={imgRef} className="relative z-10">
             <Image
               src="/hero-kalyan.png"
               alt="Devakalyan Adigopula"
@@ -99,6 +108,50 @@ export default function Hero() {
             />
           </div>
         </div>
+      </div>
+
+      {/* Floating socials (desktop only) */}
+      <div className="hidden md:flex flex-col gap-3 absolute right-6 top-1/2 -translate-y-1/2 z-20">
+        {/* Email */}
+        <a
+          href="mailto:devakalyan242@gmail.com"
+          aria-label="Email"
+          title="Email"
+          className="h-10 w-10 grid place-items-center rounded-full bg-white text-black shadow hover:bg-white/90 transition"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" stroke="currentColor" strokeWidth="1.6" />
+            <path d="m4 7 8 5 8-5" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
+        </a>
+
+        {/* LinkedIn — update with your actual profile if needed */}
+        <a
+          href="https://linkedin.com/in/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          title="LinkedIn"
+          className="h-10 w-10 grid place-items-center rounded-full bg-white text-black shadow hover:bg-white/90 transition"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M6.94 6.5A2.44 2.44 0 1 1 4.5 4.06 2.44 2.44 0 0 1 6.94 6.5M4.75 8.33h4.4V20h-4.4zM11.07 8.33h4.22v1.58h.06a4.63 4.63 0 0 1 4.16-2.29c4.45 0 5.27 2.93 5.27 6.73V20h-4.4v-4.8c0-1.14 0-2.6-1.58-2.6s-1.83 1.23-1.83 2.52V20h-4.4z"/>
+          </svg>
+        </a>
+
+        {/* GitHub */}
+        <a
+          href="https://github.com/kalyanL16"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          title="GitHub"
+          className="h-10 w-10 grid place-items-center rounded-full bg-white text-black shadow hover:bg-white/90 transition"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.49v-1.71c-2.78.6-3.36-1.19-3.36-1.19c-.45-1.15-1.11-1.46-1.11-1.46c-.9-.62.07-.61.07-.61c1 .07 1.53 1.03 1.53 1.03c.89 1.53 2.34 1.09 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.56-1.11-4.56-4.95c0-1.09.39-1.98 1.03-2.68c-.1-.25-.45-1.27.1-2.64c0 0 .84-.27 2.75 1.02c.8-.22 1.66-.33 2.51-.33s1.71.11 2.51.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.37.2 2.39.1 2.64c.64.7 1.03 1.59 1.03 2.68c0 3.85-2.34 4.69-4.57 4.94c.36.31.68.92.68 1.86v2.76c0 .27.18 .59.69 .49A10 10 0 0 0 12 2z"/>
+          </svg>
+        </a>
       </div>
     </section>
   );

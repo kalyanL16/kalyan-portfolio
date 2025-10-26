@@ -4,6 +4,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+/** Bidirectional reveal (down + up) */
 function useReveal(ref: React.RefObject<HTMLElement | null>, selector = ".edu-fade") {
   useEffect(() => {
     const root = ref.current;
@@ -12,25 +13,29 @@ function useReveal(ref: React.RefObject<HTMLElement | null>, selector = ".edu-fa
     const items = Array.from(root.querySelectorAll<HTMLElement>(selector));
     if (!items.length) return;
 
+    // initial
+    items.forEach((el, i) => {
+      el.style.transition =
+        "transform .8s cubic-bezier(.2,.8,.2,1), opacity .7s ease";
+      el.style.transitionDelay = `${i * 80}ms`;
+      el.classList.add("opacity-0", "translate-y-6");
+    });
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
+          const el = e.target as HTMLElement;
           if (e.isIntersecting) {
-            (e.target as HTMLElement).classList.add("!opacity-100", "!translate-y-0");
-            io.unobserve(e.target);
+            el.classList.add("!opacity-100", "!translate-y-0");
+          } else {
+            el.classList.remove("!opacity-100", "!translate-y-0");
           }
         });
       },
       { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
     );
 
-    items.forEach((el, i) => {
-      el.style.transition = "transform .8s cubic-bezier(.2,.8,.2,1), opacity .7s ease";
-      el.style.transitionDelay = `${i * 80}ms`;
-      el.classList.add("opacity-0", "translate-y-6");
-      io.observe(el);
-    });
-
+    items.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, [ref, selector]);
 }
@@ -57,7 +62,8 @@ export default function Education() {
               />
             </div>
 
-            <div className="relative aspect-[4/5] w-[min(520px,86vw)]">
+            {/* add edu-fade so the image animates too */}
+            <div className="relative aspect-[4/5] w-[min(520px,86vw)] edu-fade">
               <Image
                 src={src}
                 alt="Devakalyan Adigopula"
@@ -68,13 +74,11 @@ export default function Education() {
                 className={[
                   "object-cover object-top",
                   "[filter:brightness(1.06)_contrast(1.05)_saturate(1.04)]",
-                  // feathered mask (removes hard square edge)
                   "[--feather:radial-gradient(150%_140%_at_58%_52%,#000_68%,rgba(0,0,0,0)_92%)]",
                   "[-webkit-mask-image:var(--feather)]",
                   "[mask-image:var(--feather)]",
                 ].join(" ")}
               />
-              {/* subtle vignette */}
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_85%_at_50%_45%,rgba(0,0,0,0)_60%,rgba(0,0,0,0.22)_100%)]" />
             </div>
           </div>
@@ -103,7 +107,7 @@ export default function Education() {
               Analytics sharpens statistical thinking and data strategy, while hands-on experience
               across enterprise environments like <b>Wipro</b> and <b>Reliance Jio</b> shaped my
               approach to requirements, process modeling, and measurable outcomes. I connect
-              stakeholder needs to technical execution—making analysis a business advantage.
+              stakeholder needs to technical execution making analysis a business advantage.
             </p>
 
             <div className="mt-8 space-y-6">

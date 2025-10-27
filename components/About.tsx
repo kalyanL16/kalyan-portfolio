@@ -158,7 +158,7 @@ export default function About() {
                            text-[15.5px] font-medium text-white/90 bg-white/[0.06]
                            hover:bg-white/[0.12] backdrop-blur transition"
               >
-                Download Resume
+                Resume
               </Link>
             </div>
           </div>

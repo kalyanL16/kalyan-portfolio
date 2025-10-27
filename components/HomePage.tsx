@@ -1,5 +1,3 @@
-"use client";
-
 import Hero from "@/components/Hero";
 import SunArcDivider from "@/components/SunArcDivider";
 import Education from "@/components/Education";
@@ -10,21 +8,25 @@ import About from "@/components/About";
 export default function HomePage() {
   return (
     <main className="bg-[#0a0a0a] text-white scroll-smooth">
-      {/* 🌟 Hero (no changes needed) */}
+      {/* HERO */}
       <Hero />
 
+      {/* ARC (Hero → Education) */}
+      <SunArcDivider />
 
-      {/* 🎓 Education */}
+      {/* EDUCATION */}
       <Education />
 
-      {/* 🌊 Wave breaker between Education → Achievements (keep your existing one) */}
+      {/* WAVE (Education → Achievements) */}
       <WaveBreaker />
 
-      {/* 🏆 Achievements */}
+      {/* ACHIEVEMENTS */}
       <Achievements />
-      
 
-      {/* 💬 About / Contact */}
+      {/* ARC (Achievements → About) */}
+      <SunArcDivider />
+
+      {/* ABOUT / CONTACT */}
       <About />
     </main>
   );

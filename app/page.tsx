@@ -1,8 +1,9 @@
+// app/page.tsx
 import Hero from "@/components/Hero";
 import Education from "@/components/Education";
 import WaveBreaker from "@/components/WaveBreaker";
 import Achievements from "@/components/Achievements";
-import SunArcBreaker from "@/components/SunArcBreaker";
+import SunArcDivider from "@/components/SunArcDivider"; // ✅ match the file name
 import About from "@/components/About";
 
 export const metadata = {
@@ -26,8 +27,8 @@ export default function Page() {
       {/* 🏆 Achievements */}
       <Achievements />
 
-      {/* 🌅 NEW: Hero-style Sun Arc between Achievements → About */}
-      <SunArcBreaker />
+      {/* 🌅 Hero-style Sun Arc between Achievements → About */}
+      <SunArcDivider />
 
       {/* 💬 About / Contact */}
       <About />

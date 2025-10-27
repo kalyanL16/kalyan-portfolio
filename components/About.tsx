@@ -80,7 +80,7 @@ export default function About() {
           </h2>
           <p className="mt-4 max-w-[70ch] mx-auto text-[16px] leading-[1.8] text-white/80">
             A quick snapshot of my current skillset, how I operate as a professional, and what I’m
-            looking for next.
+            looking for next in high-impact roles.
           </p>
         </div>
 
@@ -90,11 +90,15 @@ export default function About() {
           <div className="about-reveal rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm hover:bg-white/[0.06] transition">
             <h3 className="text-lg font-semibold mb-2">What I Know</h3>
             <ul className="space-y-2 text-white/85 text-[15px] leading-relaxed">
-              <li>• Requirements Engineering, UAT & QA</li>
+              <li>• Requirements, Solution Definition, UAT</li>
               <li>• Process Mapping & Optimization (As-Is → To-Be)</li>
-              <li>• BI & Analytics: Tableau, Looker Studio, Power BI</li>
+              <li>. Data Analysis & Intelligence (BI)</li>
+              <li>. Project Governance & Quality Assurance</li>
+              <li>. Stakeholder & Change Management </li>
+              <li>• Analytics & Data Visualization: Tableau, Looker Studio, Power BI.</li>
+              <li>. Database & Scripting</li>
+              <li>. Cloud & Enterprise Systems</li>
               <li>• SQL, Data Storytelling, KPI Design</li>
-              <li>• Tools: JIRA, Azure DevOps, Microsoft Fabric</li>
             </ul>
           </div>
 
@@ -102,9 +106,10 @@ export default function About() {
           <div className="about-reveal rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm hover:bg-white/[0.06] transition">
             <h3 className="text-lg font-semibold mb-2">Who I Am (Professionally)</h3>
             <p className="text-white/85 text-[15px] leading-relaxed">
-              I bridge stakeholder needs and technical delivery. I thrive in structured ambiguity—
-              clarifying requirements, translating them into measurable workflows, and collaborating
-              with teams to ship solutions that improve performance and decision-making.
+              I operate as the essential translator between core business strategy and technical execution. I 
+              excel in structured ambiguity rapidly clarifying complex requirements, designing measurable 
+              workflows, and collaborating with cross-functional teams to ship and validate solutions that 
+              directly improve business performance and decision-making accuracy.
             </p>
           </div>
 
@@ -112,9 +117,9 @@ export default function About() {
           <div className="about-reveal rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm hover:bg-white/[0.06] transition">
             <h3 className="text-lg font-semibold mb-2">What I Want Next</h3>
             <p className="text-white/85 text-[15px] leading-relaxed">
-              Business Analyst / Analytics roles where I can own requirements, validate solutions
-              with data, and scale reporting/processes. I’m excited by teams that value clarity,
-              iteration, and outcome-focused delivery.
+            Seeking Business Analyst / Analytics roles where I can fully own the solution lifecycle: from 
+            initial requirement definition to data-driven solution validation. I aim to join teams that prioritize 
+            clarity, iteration, and measurable outcome-focused delivery.
             </p>
           </div>
         </div>

@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Devakalyan Adigopula — Portfolio",
   description:
     "Business Analyst Portfolio featuring data visualization, process optimization, and analytics projects.",
+  icons: {
+    icon: "/favicon.ico", // ✅ add your favicon here (place it in /public)
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
